@@ -18,7 +18,7 @@ internal class DkHolidayCalendar
                 {"Påskedag", 0},
                 {"2. påskedag", 1},
                 {"Store Bededag", 26},
-                {"Kristi Himmelfart", 39},
+                {"Kr. Himmelfart", 39},
                 {"Pinsedag", 49},
                 {"2. pinsedag", 50}
             };
@@ -83,7 +83,7 @@ internal class DkHolidayCalendar
         return GetDanishHolidays(System.DateTime.Now.Year);
     }
 
-    public static IDictionary<string, string> GetDanishHolidaysString(int year)
+    public static string GetDanishHolidaysString(int year)
     {
         var easterDependentHolidays = GetEasterDependentHolidays(year);
         var fixedHolidays = GetFixedHolidays(year);
@@ -93,11 +93,11 @@ internal class DkHolidayCalendar
 			.Union(fixedHolidays)
 			.OrderBy(h => h.Value)
             .ToDictionary(pair => pair.Key, pair => pair.Value.ToString("d",dadk));
-        
-        return allHolidays;
+        var output = allHolidays.Select(d => string.Format("{0}\t{1}", d.Key, d.Value));
+        return string.Join("\n", output);
     }
 
-    public static IDictionary<string, string> GetDanishHolidaysString()
+    public static string GetDanishHolidaysString()
     {
         return GetDanishHolidaysString(System.DateTime.Now.Year);
     }

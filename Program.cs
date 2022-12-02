@@ -15,7 +15,7 @@ var options = new JsonSerializerOptions
 };
 
 app.MapGet("/", () => Results.Redirect("/holidays"));
-app.MapGet("/holidays", () => Results.Json(DkHolidayCalendar.GetDanishHolidaysString(), options));
-app.MapGet("/holidays/{year}", (int year) => Results.Json(DkHolidayCalendar.GetDanishHolidaysString(year), options));
+app.MapGet("/holidays", () => Results.Text(DkHolidayCalendar.GetDanishHolidaysString()));
+app.MapGet("/holidays/{year}", (int year) => Results.Text(DkHolidayCalendar.GetDanishHolidaysString(year)));
 
 app.Run();
